@@ -1,0 +1,25 @@
+version: "3.1"
+services:
+  servernodexpr:
+    build: ./Back-end-application
+    volumes:
+      - ./Back-end-application:/appli
+      #- /appli/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - monreau
+   
+  frontappangular:
+    build: ./front-end-application
+    volumes:   # volume partager entre machnine et container
+      - ./front-end-application:/appli # partager le repertoire front-end-application et le nommé applic
+      - /appli/node_modules # eliminer le repertoire node_module du partage 
+    ports:
+      - "4200:4200"
+    networks:
+      - monreau
+
+
+networks:
+  monreau:
